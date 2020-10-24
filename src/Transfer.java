@@ -88,12 +88,10 @@ public class Transfer implements IFileInfor{
         return "Transfer:";
     }
 
-    @Override
     public String getFileInfor() {
         return transferStk+","+money+","+note+","+getCreatedAtString();
     }
 
-    @Override
     public void putFileInfor(String data) throws ParseException {
         try {
             String[] param = data.split(",");

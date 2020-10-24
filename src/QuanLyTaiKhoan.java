@@ -1,8 +1,6 @@
 import com.sun.tools.javac.Main;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -117,8 +115,24 @@ public class QuanLyTaiKhoan  {
         }
     }
 
-    static void readFile() {
-        
+    static void readFile(){
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("account.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String s;
+        while(true){
+            try {
+                if (!((s=reader.readLine())!=null)){
+                    System.out.println(s);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
