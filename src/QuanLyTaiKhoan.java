@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class QuanLyTaiKhoan  {
+public class QuanLyTaiKhoan {
     static Scanner scan = new Scanner(System.in);
     static Account account = null;
 
@@ -18,13 +18,13 @@ public class QuanLyTaiKhoan  {
             showMenu();
             choose = Integer.parseInt(scan.nextLine());
 
-            switch(choose) {
+            switch (choose) {
                 case 1:
                     account = new Account();
                     account.input();
                     break;
                 case 2:
-                    if(account != null) {
+                    if (account != null) {
                         account.addReceiver();
 
                         account.display();
@@ -33,7 +33,7 @@ public class QuanLyTaiKhoan  {
                     }
                     break;
                 case 3:
-                    if(account != null) {
+                    if (account != null) {
                         account.transfer();
                         account.display();
                     } else {
@@ -41,7 +41,7 @@ public class QuanLyTaiKhoan  {
                     }
                     break;
                 case 4:
-                    if(account != null) {
+                    if (account != null) {
                         account.displayReceiverHistory();
                     } else {
                         System.err.println("TK khong ton tai");
@@ -49,7 +49,7 @@ public class QuanLyTaiKhoan  {
                     break;
                 case 5:
 
-                    if(account != null) {
+                    if (account != null) {
                         account.displayTransferHistory();
                     } else {
                         System.err.println("TK khong ton tai");
@@ -68,7 +68,7 @@ public class QuanLyTaiKhoan  {
                     System.out.println("Nhap sai!!!");
                     break;
             }
-        } while(choose != 8);
+        } while (choose != 8);
     }
 
     static void saveFile() {
@@ -89,7 +89,7 @@ public class QuanLyTaiKhoan  {
             line = Receiver.getHeader() + "\n";
             fos.write(line.getBytes());
             for (Receiver receiver : account.getReceiverList()) {
-                line = receiver.getFileInfor()+ "\n";
+                line = receiver.getFileInfor() + "\n";
                 fos.write(line.getBytes());
             }
 
@@ -97,7 +97,7 @@ public class QuanLyTaiKhoan  {
             line = Transfer.getHeader() + "\n";
             fos.write(line.getBytes());
             for (Transfer transfer : account.getTransferList()) {
-                line = transfer.getFileInfor()+ "\n";
+                line = transfer.getFileInfor() + "\n";
                 fos.write(line.getBytes());
             }
         } catch (FileNotFoundException ex) {
@@ -105,7 +105,7 @@ public class QuanLyTaiKhoan  {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(fos != null) {
+            if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException ex) {
@@ -115,25 +115,17 @@ public class QuanLyTaiKhoan  {
         }
     }
 
-    static void readFile(){
+    static void readFile() {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("account.txt"));
-        } catch (FileNotFoundException e) {
+            String s;
+            while ((s = reader.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        String s;
-        while(true){
-            try {
-                if (!((s=reader.readLine())!=null)){
-                    System.out.println(s);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
     }
 
     static void showMenu() {
@@ -156,7 +148,7 @@ public class QuanLyTaiKhoan  {
         System.out.println("Password: ");
         String password = scan.nextLine();
 
-        if(username.equalsIgnoreCase("nhom13") && password.equals("Nhom13@123")) {
+        if (username.equalsIgnoreCase("nhom13") && password.equals("Nhom13@123")) {
             System.out.println("Login Success!!!");
         } else {
             System.err.println("Login Failed!!!");
